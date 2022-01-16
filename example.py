@@ -52,7 +52,6 @@ def get_key(val, hash):
 
 def run():
 
-    env = TrueSkill(mu=0, sigma=1)
     games = load_games("./test.csv")
     PLAYERS = {player: Rating() for players in games for player in players}
 
@@ -65,7 +64,7 @@ def run():
         for player_name, new_rating in zip(player_names, new_ratings):
             PLAYERS[player_name] = new_rating[0]
 
-    leaderboard = sorted(list(PLAYERS.values()), key=env.expose, reverse=True)
+    leaderboard = sorted(list(PLAYERS.values()), reverse=True)
 
     rankings = [get_key(rating, PLAYERS) for rating in leaderboard]
     print("rankings:", rankings)
